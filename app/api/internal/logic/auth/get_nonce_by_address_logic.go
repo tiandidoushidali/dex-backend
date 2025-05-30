@@ -30,7 +30,7 @@ func NewGetNonceByAddressLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 
 func (l *GetNonceByAddressLogic) GetNonceByWalletAddress(req *types.GetNonceByAddressReq) (*types.GetNonceByAddressResp, error) {
 	logx.Infof("GetNonceByWalletAddress req:%v", req)
-	walletLoginNonceKey := fmt.Sprintf(constants.REDIS_AUTH_WALLET_LOGIN_NONCE, req.WalletAddress)
+	walletLoginNonceKey := fmt.Sprintf(constants.RedisAuthWalletLoginNonce, req.WalletAddress)
 	var nonce string
 	var err error
 	nonce, err = l.svcCtx.RedisClient.Get(l.ctx, walletLoginNonceKey).Result()

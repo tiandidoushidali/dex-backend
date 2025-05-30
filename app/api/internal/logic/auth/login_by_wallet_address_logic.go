@@ -34,7 +34,7 @@ func NewWalletAddressLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 
 func (l *LoginByWalletAddressLogic) WalletAddressLogin(req *types.WalletAddressLoginReq) (resp *types.JwtAuthResp, err error) {
 	// 1.获取nonce
-	nonceCacheKey := fmt.Sprintf(constants.REDIS_AUTH_WALLET_LOGIN_NONCE, req.WalletAddress)
+	nonceCacheKey := fmt.Sprintf(constants.RedisAuthWalletLoginNonce, req.WalletAddress)
 	nonce, err := l.svcCtx.RedisClient.Get(l.ctx, nonceCacheKey).Result()
 	if err != nil {
 		if err.Error() == string(redis.Nil) {

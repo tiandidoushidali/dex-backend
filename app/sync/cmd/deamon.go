@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"context"
-	_ "dex/app/sync/internal/config"
 	"dex/app/sync/internal/service"
 	"fmt"
 	"os"
@@ -18,7 +17,7 @@ var deamonCmd = &cobra.Command{
 	Short: "deamon commands",
 	Long:  "deamon commands",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("deamon called")
+		fmt.Println("deamon called", args)
 		var license, _ = cmd.Flags().GetString("license")
 		fmt.Println("flag license:", license)
 		//fmt.Println(cmd.Usage())

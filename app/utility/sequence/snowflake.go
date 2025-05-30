@@ -51,7 +51,7 @@ func (s *Snowflake) Next() uint64 {
 	} else {
 		s.sequence = 0
 	}
-	var t uint64 = uint64(now - int64(s.epoch))
+	var t = uint64(now - int64(s.epoch))
 	s.timestamp = uint64(now)
 	seq := (t << timestampShift) |
 		(s.datacenterID << datacenterIDShift) |

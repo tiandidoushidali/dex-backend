@@ -2,14 +2,15 @@ package solana
 
 import (
 	"fmt"
+
 	"github.com/robfig/cron/v3"
 )
 
-type SolanaTask struct {
+type Task struct {
 }
 
-func NewSolanaTask() *SolanaTask {
-	return &SolanaTask{}
+func NewSolanaTask() *Task {
+	return &Task{}
 }
 
 func RegisterTask(c *cron.Cron) {
@@ -17,6 +18,6 @@ func RegisterTask(c *cron.Cron) {
 	c.AddJob("@every 1s", task)
 }
 
-func (etherum *SolanaTask) Run() {
+func (etherum *Task) Run() {
 	fmt.Println("solana task run")
 }

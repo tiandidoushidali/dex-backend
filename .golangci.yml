@@ -8,7 +8,7 @@ linters:
 #    - goimports
 #    - gocyclo
     - unused
-#    - revive
+    - revive
   disable:
     - gosimple
     - errcheck

@@ -2,14 +2,15 @@ package etherum
 
 import (
 	"fmt"
+
 	"github.com/robfig/cron/v3"
 )
 
-type EtherumTask struct {
+type Task struct {
 }
 
-func NewEtherumTask() *EtherumTask {
-	return &EtherumTask{}
+func NewEtherumTask() *Task {
+	return &Task{}
 }
 
 func RegisterTask(c *cron.Cron) {
@@ -20,6 +21,6 @@ func RegisterTask(c *cron.Cron) {
 	c.AddJob("@every 2s", eventPairCreateTask)
 }
 
-func (etherum *EtherumTask) Run() {
+func (etherum *Task) Run() {
 	fmt.Println("etherum task run")
 }

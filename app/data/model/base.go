@@ -10,7 +10,7 @@ type Base struct {
 	gorm.Model
 }
 
-func (base *Base) BeforeCreate(tx *gorm.DB) error {
+func (base *Base) BeforeCreate(tx *gorm.DB) error { // nolint
 	base.ID = uint(utility.Sequence.Next())
 	return nil
 }

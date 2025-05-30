@@ -11,7 +11,7 @@ import (
 	xhttp "github.com/zeromicro/x/http"
 )
 
-func ApiHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func APIHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.Request
 		if err := httpx.Parse(r, &req); err != nil {
@@ -19,8 +19,8 @@ func ApiHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			xhttp.JsonBaseResponseCtx(r.Context(), w, err)
 			return
 		}
-		l := logic.NewApiLogic(r.Context(), svcCtx)
-		resp, err := l.Api(&req)
+		l := logic.NewAPILogic(r.Context(), svcCtx)
+		resp, err := l.API(&req)
 		if err != nil {
 			//httpx.ErrorCtx(r.Context(), w, err)
 			xhttp.JsonBaseResponseCtx(r.Context(), w, err)

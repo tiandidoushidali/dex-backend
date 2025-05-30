@@ -14,6 +14,6 @@ func New() *Service {
 }
 
 func (s *Service) Run(ctx context.Context) {
-	fmt.Println("solana task run")
+	fmt.Println("solana task run", ctx)
 	corntask.NewTask().Run()
 }

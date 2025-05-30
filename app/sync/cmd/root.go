@@ -3,8 +3,9 @@ package cmd
 import (
 	"dex/app/sync/internal/config"
 	"fmt"
-	"github.com/spf13/cobra"
 	"log"
+
+	"github.com/spf13/cobra"
 )
 
 var (
@@ -15,7 +16,7 @@ var (
 		Short: "执行同步操作",
 		Long:  "执行同步操作明细",
 		Run: func(cmd *cobra.Command, args []string) {
-			fmt.Println("in command root")
+			fmt.Println("in command root", cmd, args)
 			fmt.Println("configPath:", configPath)
 			config.Setup(configPath)
 		},
