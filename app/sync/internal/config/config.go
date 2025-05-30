@@ -3,6 +3,7 @@ package config
 import (
 	"flag"
 	"fmt"
+
 	"github.com/spf13/viper"
 )
 
@@ -29,6 +30,7 @@ func init() {
 
 func Setup(configPath string) {
 	fmt.Println("flag config path:", configPath)
+
 	viper.AddConfigPath(configPath)
 	viper.SetConfigType("yaml")
 	viper.SetConfigName("config")

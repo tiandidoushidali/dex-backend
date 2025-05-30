@@ -1,9 +1,12 @@
 package corntask
 
 import (
+	"fmt"
+	"time"
+
 	"dex/app/sync/internal/service/corntask/etherum"
 	"dex/app/sync/internal/service/corntask/solana"
-	"fmt"
+
 	"github.com/robfig/cron/v3"
 	"github.com/zeromicro/go-zero/core/threading"
 )
@@ -15,7 +18,7 @@ func NewTask() *Task {
 }
 
 func (task *Task) process() {
-	fmt.Print("in process")
+	fmt.Print("in process", time.Now())
 
 	c := cron.New(
 		cron.WithChain(

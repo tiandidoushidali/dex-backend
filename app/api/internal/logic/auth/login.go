@@ -2,11 +2,13 @@ package authlogic
 
 import (
 	"context"
+	"time"
+
 	"dex/app/api/internal/svc"
 	"dex/app/api/internal/types"
+
 	"github.com/golang-jwt/jwt/v4"
 	"github.com/zeromicro/go-zero/core/logx"
-	"time"
 )
 
 type AuthLogic struct {

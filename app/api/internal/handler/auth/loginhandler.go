@@ -1,12 +1,14 @@
 package auth
 
 import (
+	"net/http"
+
 	authlogic "dex/app/api/internal/logic/auth"
 	"dex/app/api/internal/svc"
 	"dex/app/api/internal/types"
+
 	"github.com/zeromicro/go-zero/rest/httpx"
 	xhttp "github.com/zeromicro/x/http"
-	"net/http"
 )
 
 func LoginHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
