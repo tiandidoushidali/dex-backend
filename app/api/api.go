@@ -4,10 +4,13 @@ import (
 	"dex/app/api/internal/config"
 	"dex/app/api/internal/handler"
 	"dex/app/api/internal/svc"
+	"dex/app/data/utility"
 	"flag"
 	"fmt"
-	"github.com/zeromicro/go-zero/rest/httpx"
 	"net/http"
+	"time"
+
+	"github.com/zeromicro/go-zero/rest/httpx"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/rest"
@@ -20,6 +23,11 @@ func main() {
 
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
+
+	// 时间使用UTC
+	time.Local = time.UTC
+	// 初始化utility
+	utility.Setup()
 
 	server := rest.MustNewServer(c.RestConf)
 	defer server.Stop()

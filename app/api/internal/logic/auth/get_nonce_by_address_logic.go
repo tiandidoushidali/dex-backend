@@ -4,6 +4,8 @@ import (
 	"context"
 	"dex/app/api/internal/svc"
 	"dex/app/api/internal/types"
+	"dex/app/common/constants"
+	"fmt"
 	"math/rand"
 	"strconv"
 	"time"
@@ -28,9 +30,12 @@ func NewGetNonceByAddressLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 
 func (l *GetNonceByAddressLogic) GetNonceByWalletAddress(req *types.GetNonceByAddressReq) (*types.GetNonceByAddressResp, error) {
 	logx.Infof("GetNonceByWalletAddress req:%v", req)
-	nonce, err := l.svcCtx.RedisClient.Get(l.ctx, req.WalletAddress).Result()
+	walletLoginNonceKey := fmt.Sprintf(constants.REDIS_AUTH_WALLET_LOGIN_NONCE, req.WalletAddress)
+	var nonce string
+	var err error
+	nonce, err = l.svcCtx.RedisClient.Get(l.ctx, walletLoginNonceKey).Result()
 	if err != nil {
-		if err.Error() == string(redis.Nil) {
+		if err.Error() != string(redis.Nil) {
 			return nil, err
 		}
 	}
@@ -39,16 +44,16 @@ func (l *GetNonceByAddressLogic) GetNonceByWalletAddress(req *types.GetNonceByAd
 		if err != nil {
 			return nil, err
 		}
-		nonce, err := createNonce(req.WalletAddress, id)
+		nonce, err = createNonce(req.WalletAddress, id)
 		if err != nil {
 			return nil, err
 		}
-		err = l.svcCtx.RedisClient.Set(context.Background(), req.WalletAddress, nonce, time.Hour*24).Err()
+		err = l.svcCtx.RedisClient.Set(context.Background(), walletLoginNonceKey, nonce, time.Hour*24).Err()
 		if err != nil {
 			return nil, err
 		}
 	}
-	logx.Infof("GetNonceByWalletAddress address:%s, nonce:%s", req.WalletAddress, nonce)
+	logx.Infof("GetNonceByWalletAddress redisKey:%s address:%s, nonce:%s", walletLoginNonceKey, req.WalletAddress, nonce)
 	return &types.GetNonceByAddressResp{
 		Nonce: nonce,
 	}, nil

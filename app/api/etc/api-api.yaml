@@ -13,7 +13,7 @@ Redis:
   DB: 0
 
 Mysql:
-  Dsn: "user:pass@tcp(127.0.0.1:3306)/dbname?charset=utf8mb4&parseTime=True&loc=Local"
+  Dsn: "root:root123456@tcp(127.0.0.1:3306)/dex?charset=utf8mb4&parseTime=True&loc=Local"
   Timeout: 30 # 连接超时
   ReadTimeout: 30
   WriteTimeout: 30

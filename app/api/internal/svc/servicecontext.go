@@ -2,6 +2,7 @@ package svc
 
 import (
 	"dex/app/api/internal/config"
+
 	"github.com/redis/go-redis/v9"
 	"github.com/sony/sonyflake"
 	"gorm.io/driver/mysql"
@@ -12,7 +13,7 @@ type ServiceContext struct {
 	Config      config.Config
 	SF          *sonyflake.Sonyflake
 	RedisClient *redis.Client
-	MysqlClient *gorm.DB
+	MysqlDB     *gorm.DB
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -41,7 +42,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	return &ServiceContext{
 		Config:      c,
 		SF:          sf,
-		MysqlClient: db,
+		MysqlDB:     db,
 		RedisClient: redisClient,
 	}
 }

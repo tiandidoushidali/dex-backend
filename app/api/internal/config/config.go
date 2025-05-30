@@ -1,8 +1,9 @@
 package config
 
 import (
-	"github.com/zeromicro/go-zero/rest"
 	"time"
+
+	"github.com/zeromicro/go-zero/rest"
 )
 
 type Config struct {
@@ -25,7 +26,7 @@ type RedisConf struct {
 }
 
 type MysqlConf struct {
-	Dsn         string        `default:"dsn"`
+	Dsn         string        `json:"Dsn" default:"Dsn"`
 	MaxIdle     int           `default:"10"` // 空闲链接 空闲链接 + 活跃链接 <= 最大链接
 	MaxIdleTime time.Duration `default:"1800"`
 	//MaxLifeTime int    `default:"3600"` // 最大存活时间 （包含空闲等待时间）

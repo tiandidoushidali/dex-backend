@@ -1,7 +1,7 @@
 package types
 
 type GetNonceByAddressReq struct {
-	WalletAddress string `json:"wallet_address"`
+	WalletAddress string `path:"wallet_address"`
 }
 
 type GetNonceByAddressResp struct {
@@ -11,6 +11,7 @@ type GetNonceByAddressResp struct {
 type WalletAddressLoginReq struct {
 	WalletAddress string `json:"wallet_address" binding:"len=42,startwith=0x"`
 	Signature     string `json:"signature" binding:"required"`
+	Nonce         string `json:"nonce" binding:"required"`
 }
 
 type JwtAuthResp struct {
