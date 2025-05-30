@@ -1,0 +1,18 @@
+
+linters:
+  enable:
+#    - govet
+#    - errcheck
+#    - staticcheck
+#    - gofmt
+#    - goimports
+#    - gocyclo
+    - unused
+#    - revive
+  disable:
+    - gosimple
+    - errcheck
+    - govet
+
+issues:
+  exclude-use-default: true # false: 自动启用默认启用的linters 命令：golangci-lint linters 查看默认启用的linter
