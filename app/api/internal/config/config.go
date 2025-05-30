@@ -14,8 +14,8 @@ type Config struct {
 }
 
 type JwtAuth struct {
-	AccessSecret string `json:",default=secret"` // nolint
-	AccessExpire int64  `json:",default=3600"`   //nolint
+	AccessSecret string `json:"" default:"secret"` // nolint
+	AccessExpire int64  `json:"" default:"3600"`   //nolint
 }
 
 type RedisConf struct {
