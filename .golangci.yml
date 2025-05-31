@@ -6,7 +6,7 @@ linters:
 #    - staticcheck
     - gofmt
     - goimports
-#    - gocyclo
+    - gocyclo
     - gosec
     - unused
     - revive

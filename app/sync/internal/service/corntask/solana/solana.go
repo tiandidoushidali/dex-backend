@@ -23,6 +23,6 @@ func RegisterTask(c *cron.Cron) {
 	logx.Infof("RegisterTask entryID: %d", entryID)
 }
 
-func (etherum *Task) Run() {
+func (t *Task) Run() {
 	fmt.Println("solana task run")
 }
