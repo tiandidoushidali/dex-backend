@@ -3,7 +3,7 @@ linters:
   enable:
     - govet
     - errcheck
-#    - staticcheck
+    - staticcheck
     - gofmt
     - goimports
     - gocyclo
