@@ -2,7 +2,7 @@
 linters:
   enable:
     - govet
-#    - errcheck
+    - errcheck
 #    - staticcheck
     - gofmt
     - goimports
@@ -12,7 +12,6 @@ linters:
     - revive
   disable:
     - gosimple
-    - errcheck
 
 issues:
   exclude-use-default: true # false: 自动启用默认启用的linters 命令：golangci-lint linters 查看默认启用的linter

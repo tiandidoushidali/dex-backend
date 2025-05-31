@@ -31,7 +31,11 @@ func (l *AuthLogic) Login(req *types.LoginReq) (*types.LoginResp, error) {
 	claims["exp"] = time.Now().Add(time.Hour * time.Duration(8)).Unix()
 	claims["addr"] = req.Username
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	token.SignedString([]byte(l.svcCtx.Config.JwtAuth.AccessSecret))
+	tokenStr, err := token.SignedString([]byte(l.svcCtx.Config.JwtAuth.AccessSecret))
+	if err != nil {
+		return nil, err
+	}
+	logx.Infof("Login req:%v token: %s", req, tokenStr)
 
 	resp := &types.LoginResp{Token: token.Signature}
 	return resp, nil

@@ -4,23 +4,32 @@ import (
 	"fmt"
 
 	"github.com/robfig/cron/v3"
+	"github.com/zeromicro/go-zero/core/logx"
 )
 
 type Task struct {
 }
 
-func NewEtherumTask() *Task {
+func NewEthereumTask() *Task {
 	return &Task{}
 }
 
 func RegisterTask(c *cron.Cron) {
-	task := NewEtherumTask()
-	c.AddJob("@every 1s", task)
+	task := NewEthereumTask()
+	entryID, err := c.AddJob("@every 1s", task)
+	if err != nil {
+		panic(err)
+	}
+	logx.Infof("RegisterTask task entryID: %d", entryID)
 
 	eventPairCreateTask := NewEventPairCreate()
-	c.AddJob("@every 2s", eventPairCreateTask)
+	entryID, err = c.AddJob("@every 2s", eventPairCreateTask)
+	if err != nil {
+		panic(err)
+	}
+	logx.Infof("RegisterTask eventPairCreateTask entryID: %d", entryID)
 }
 
-func (etherum *Task) Run() {
-	fmt.Println("etherum task run")
+func (ethereum *Task) Run() {
+	fmt.Println("ethereum task run")
 }
