@@ -1,10 +1,11 @@
 package utility
 
 import (
-	"dex/app/utility/net"
-	"dex/app/utility/sequence"
 	"strconv"
 	"strings"
+
+	"dex/app/utility/net"
+	"dex/app/utility/sequence"
 )
 
 var Sequence sequence.Sequence
@@ -18,6 +19,6 @@ func initSequence() (err error) {
 		return
 	}
 	// Create snowflake sequence
-	Sequence = sequence.NewSnowflake(uint64(10000), uint64(machineID), uint64(1))
+	Sequence = sequence.NewSnowflake(uint64(10000), uint64(machineID), uint64(1)) // #nosec G115
 	return
 }

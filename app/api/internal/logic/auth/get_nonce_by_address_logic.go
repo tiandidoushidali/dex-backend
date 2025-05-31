@@ -2,13 +2,14 @@ package authlogic
 
 import (
 	"context"
-	"dex/app/api/internal/svc"
-	"dex/app/api/internal/types"
-	"dex/app/common/constants"
 	"fmt"
 	"math/rand"
 	"strconv"
 	"time"
+
+	"dex/app/api/internal/svc"
+	"dex/app/api/internal/types"
+	"dex/app/common/constants"
 
 	"github.com/redis/go-redis/v9"
 	"github.com/zeromicro/go-zero/core/logx"
@@ -73,7 +74,7 @@ func createNonce(address string, id uint64) (string, error) {
 	}
 	// 3. 拼接后打乱顺序，取前10位
 	raw := idStr + addrPart
-	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	r := rand.New(rand.NewSource(time.Now().UnixNano())) // #nosec G404
 	runes := []rune(raw)
 	r.Shuffle(len(runes), func(i, j int) {
 		runes[i], runes[j] = runes[j], runes[i]

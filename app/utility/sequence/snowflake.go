@@ -38,20 +38,20 @@ func (s *Snowflake) Next() uint64 {
 	s.Lock()
 	defer s.Unlock()
 
-	now := time.Now().UnixMilli()
-	if s.timestamp == uint64(now) {
+	now := uint64(time.Now().UnixMilli()) // #nosec G115
+	if s.timestamp == now {
 		s.sequence = (s.sequence + 1) & sequenceMask // 确保不超过每秒sequence数限制
 		if s.sequence == 0 {
 			// if ID has exceeded the uper limit
 			// you need to wait for some millisecond before continuing to generate
-			for now <= int64(s.timestamp) {
-				now = time.Now().UnixMilli()
+			for now <= s.timestamp {
+				now = uint64(time.Now().UnixMilli()) // #nosec G115
 			}
 		}
 	} else {
 		s.sequence = 0
 	}
-	var t = uint64(now - int64(s.epoch))
+	var t = uint64(now - s.epoch)
 	s.timestamp = uint64(now)
 	seq := (t << timestampShift) |
 		(s.datacenterID << datacenterIDShift) |
